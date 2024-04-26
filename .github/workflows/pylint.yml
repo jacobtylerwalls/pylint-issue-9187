@@ -1,0 +1,21 @@
+name: Pylint
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v3
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+      - name: Install pylint
+        run: pip install pylint
+      - name: Run "pylint --recursive=y ."
+        run: pylint --recursive=y . || true
+      - name: Run "pylint --recursive=y ./src1"
+        run: pylint --recursive=y ./src1 || true
+      - name: Run "pylint --recursive=y ./src2"
+        run: pylint --recursive=y ./src2 || true
